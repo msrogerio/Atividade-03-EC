@@ -4,24 +4,26 @@ author: "Marlon da Silva Rogério"
 output: word_document
 ---
 
-## 4.7 > 4.4
+## 4.7 > 4.7
 
 Dados de origem:
 ```{r}
 dados = c (
-  96.0, 95.0, 100.0, 108.0, 120.0, 110.5, 97.0, 92.5,
-  90.0, 93.0, 89.0, 88.0, 87.0, 92.5, 87.5, 85.0,
-  86.0, 85.0, 105.0, 105.0, 90.0, 100.0, 95.0, 95.0
+  7.1, 8.9, 6.0, 7.0,
+  6.2, 8.8, 4.9, 6.1,
+  6.0, 5.0, 9.1, 3.9,
+  11.1, 10.8, 10.2, 11.9,
+  7.0, 11.3, 10.0, 11.7
 )
 ```
 
 Plotagem dos dados:
 
 ```{r}
-tratamento = factor(rep(1:3, each = 8), label = c ("Parotidectomizado", "Pseudoparotidectomizado", "Normal"))
+tratamento = factor(rep(1:5, each = 4), label = c ("A", "B", "C", "D", "E"))
 tratamento
 
-boxplot(dados ~ tratamento, col = c("1", "2", "3"))
+boxplot(dados ~ tratamento, col = c(1,2,3,4,5))
 ```
 
 Tabela resumo:
@@ -32,20 +34,8 @@ summary(modelo)
 ```
 
 Considerando o resultado de Pvalor, representado pelo parâmento Pr 
-da tabela resumo mostrada pela função summary, é rejeitada a hipótese de 
+da tabela resumo mostrada pela função summary, não é rejeitada a hipótese de 
 igualdade de médias, considerando o nível de significância de 5% e que
-F calculado (Fcal.) = 6.732 > F tabelado = 3.47
-
-Para isso, foi necessário teste de Tukey para vericiar o grau de diferença
-entre os tratamentos.
+F calculado (Fcal.) = 6.942 < F tabelado = 3.06
 
 --
-
-```{r}
-require(laercio)
-LTukey(modelo, which = "tratamento", conf.level = 0.95)
-```
-
-Como resultado, o teste de Tukey mostra significância para o tratamento 
-Parotidectomizado.
-

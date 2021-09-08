@@ -9,8 +9,7 @@ tratamento
 
 boxplot(dados ~ tratamento, col = c("1", "2", "3"))
 
-modelo  <- aov(dados ~ tratamento)
+modelo = aov(dados ~ tratamento)
 summary(modelo)
 
-require(laercio)
-LTukey(modelo, which = "tratamento", conf.level = 0.99)
+# F calculado (Fcal.) = 1.396 < F tabelado = 6.93

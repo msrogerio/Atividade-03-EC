@@ -1,0 +1,51 @@
+---
+title: "Atividade 02"
+author: "Marlon da Silva Rogério"
+output: word_document
+---
+
+## 4.7 > 4.4
+
+Dados de origem:
+```{r}
+dados = c (
+  96.0, 95.0, 100.0, 108.0, 120.0, 110.5, 97.0, 92.5,
+  90.0, 93.0, 89.0, 88.0, 87.0, 92.5, 87.5, 85.0,
+  86.0, 85.0, 105.0, 105.0, 90.0, 100.0, 95.0, 95.0
+)
+```
+
+Plotagem dos dados:
+
+```{r}
+tratamento = factor(rep(1:3, each = 8), label = c ("Parotidectomizado", "Pseudoparotidectomizado", "Normal"))
+tratamento
+
+boxplot(dados ~ tratamento, col = c("1", "2", "3"))
+```
+
+Tabela resumo:
+
+```{r}
+modelo = aov(dados ~ tratamento)
+summary(modelo)
+```
+
+Considerando o resultado de Pvalor, representado pelo parâmento Pr 
+da tabela resumo mostrada pela função summary, é rejeitada a hipótese de 
+igualdade de médias, considerando o nível de significância de 5% e que
+F calculado (Fcal.) = 6.732 > F tabelado = 3.47
+
+Para isso, foi necessário teste de Tukey para vericiar o grau de diferença
+entre os tratamentos.
+
+--
+
+```{r}
+require(laercio)
+LTukey(modelo, which = "tratamento", conf.level = 0.95)
+```
+
+Como resultado, o teste de Tukey mostra significância para o tratamento 
+Parotidectomizado.
+
